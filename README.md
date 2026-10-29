@@ -25,10 +25,10 @@
 - 💡 **极客交流**：MicroDuck 算法、结构件打印与固件优化讨论。
 
 <div align="center">
-  <img src="assets/wechat-group-qr.png" alt="微信交流群二维码" width="280">
+  <img src="assets/blogger_QR.jpeg" alt="微信交流二维码" width="280">
   <br>
-  <sub><b>MicroDuck 硬件与复刻交流群</b><br>
-  扫描二维码加入，如遇满人请加作者微信（备注: MicroDuck）</sub>
+  <sub><b>MicroDuck 复刻填坑交流</b><br>
+  请加作者微信（备注: MicroDuck）</sub>
 </div>
 
 ---
