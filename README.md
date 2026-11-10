@@ -37,14 +37,16 @@
 | 你现在的情况 | 你可能卡在 | 从这里开始 |
 |---|---|---|
 | 还没买件，不确定选 XL330 还是飞特 | 舵机版本、结构件、训练模型不匹配 | [选型与采购](docs/build/hardware-selection.md) |
-| 准备打 HAT 板或已经收到板子 | 供电、飞特舵机兼容、丢帧 | [HAT 扩展板](docs/build/hat-board.md) |
+| 准备打 HAT，或疑惑 HAT 要不要刷固件 | 电源入口、舵机接口、40 Pin、总线 | [HAT 扩展板](docs/build/hat-board.md) |
 | 不知道 `imu_to_dxl` 是干什么的 | 躯干姿态、安装方向、总线通讯 | [IMU_TO_DXL 板](docs/build/imu-to-dxl.md) |
 | 主控板不会烧录、开不了机或连不上电脑 | 镜像、SD 卡、启动模式、网络 | [Radxa Zero 3W](docs/build/radxa-zero-3w.md) |
-| 舵机不会设 ID、回中或标定 | ID 冲突、零位、方向、供电 | [飞特舵机设置](docs/build/servo-hd1910.md) |
-| 3D 打印件装不上或容易断 | 文件版本、公差、加固、装配顺序 | [3D 打印与装配](docs/build/assembly-and-wiring.md) |
+| 绿灯长亮或闪烁，但一直没有 Wi-Fi | SD 卡、镜像、串口日志 | [绿灯与 WiFi 排查](docs/troubleshooting/radxa-boot.md) |
+| 舵机不会设 ID，或不知道 15 个 ID 怎么分配 | 调试板、网页工具、左右腿和头颈映射 | [飞特舵机设置](docs/build/servo-hd1910.md) |
+| 3D 打印件装不上、没有散热孔或容易断 | 飞特版本、避让孔、加固、装配顺序 | [3D 打印与装配](docs/build/assembly-and-wiring.md) |
 | 嘉立创报价异常或 SMT 换料费很高 | 层压结构、BOM、整盘物料 | [打板与省钱](docs/troubleshooting/jlc-order.md) |
 | 15 个舵机接上后丢帧、重启或发热 | 总线、电源、地线、线材、HAT | [丢帧排查](docs/troubleshooting/frame-drop.md) |
 | 想训练，但没 GPU 或不知道先做什么 | 仿真、模型、舵机参数、数据准备 | [训练路线](docs/build/training.md) |
+| 两条腿总线到颈部不知道怎么合并 | 线序、端子、ID、IMU 接入 | [总线汇合与整机联调](docs/build/integration.md#两条腿颈部和头部的总线汇合) |
 | 所有硬件都装好了，却站不稳或走不起来 | 标定、IMU 方向、控制频率、sim2real | [整机联调](docs/build/integration.md) |
 
 如果问题不在表里，直接看 [按症状排障](docs/troubleshooting/README.md)。
@@ -70,10 +72,22 @@
 | HAT 扩展板研究 | 已完成 | 明确供电、舵机接口与飞特适配问题 |
 | `imu_to_dxl` 研究 | 已完成 | 明确躯干 IMU 的作用与接入思路 |
 | Radxa Zero 3W 启动 | 已完成 | 主控板已能够运行 |
-| 舵机与 3D 结构件组装 | 已完成 | 机械件已组装，待整机联调验证 |
+| SD 卡兼容与 WiFi 热点 | 已完成 | 更换 microSD 卡后热点正常出现 |
+| 舵机 ID 与 15 关节映射 | 已完成 | 使用微雪调试板和网页工具写入 |
+| 舵机与 3D 结构件组装 | 已完成 | 已处理飞特版避让孔、散热孔和加固问题 |
 | 总线、标定与行走 | 进行中 | 后续记录实测数据、失败现象和修复过程 |
 
 状态会随实测更新。没有实机证据的结论会明确标成“待验证”。
+
+### 本次实机踩坑索引
+
+- **舵机 ID**：写 ID 需要电池、舵机接口和电脑连接；本项目使用微雪调试板。15 个舵机按右腿 `10–14`、左腿 `20–24`、颈部/头部/嘴 `30–34` 分配。[查看完整步骤](docs/build/servo-hd1910.md)
+- **Radxa 烧录与选卡**：SanDisk 特定卡未能正常使用，最终更换朗科 32GB microSD 后启动成功。[查看烧录流程](docs/build/radxa-zero-3w.md#如何把镜像烧进-sd-卡)
+- **绿灯闪烁但没有 WiFi**：状态灯闪烁不代表系统正常；本项目通过 USB-TTL、SD 卡检查和换卡定位，换卡后热点很快出现。[查看排查过程](docs/troubleshooting/radxa-boot.md)
+- **3D 打印件**：老版本头部没有散热孔；飞特舵机有凸出结构，必须使用飞特版配件；脆弱件需要铝制加固。[查看装配避坑](docs/build/assembly-and-wiring.md#3d-打印件版本的实机踩坑)
+- **IMU_TO_DXL**：默认总线 ID 为 200，伪装成舵机从机，ID 在固件里写死，不需要修改。[查看 IMU 说明](docs/build/imu-to-dxl.md#总线-id-200-在固件里写死)
+- **HAT 板**：没有需要刷写的固件，本质上是电源与接口/总线汇合板；重点搞清电源、舵机和 40 Pin 连接。[查看 HAT 说明](docs/build/hat-board.md)
+- **舵机总线汇合**：两条腿总线上行到颈部后需要手工制作汇合线束，再连接头颈、IMU 和 HAT。[查看总线汇合](docs/build/integration.md#两条腿颈部和头部的总线汇合)
 
 ---
 

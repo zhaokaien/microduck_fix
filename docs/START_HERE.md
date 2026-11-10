@@ -14,7 +14,10 @@ MicroDuck 复刻不是“把所有零件接起来”这么简单。正确的顺�
 | 零件已到 | 清点版本、数量、接口和供电，不要直接全部上电 | [整机复刻路线](build/README.md) |
 | PCB 要打样 | 先检查层压、BOM、贴片费和替代料 | [打板与省钱](troubleshooting/jlc-order.md) |
 | 主控板开不了机 | 先排查镜像、SD 卡、启动方式和板卡版本 | [主控板启动](troubleshooting/radxa-boot.md) |
-| 单个舵机不动作 | 先只接一个舵机，确认 ID、供电、线序和总线 | [舵机设置](build/servo-hd1910.md) |
+| 绿灯长亮或闪烁，但没有 Wi-Fi | 用 USB-TTL 看日志，再用 Linux 检查 SD 卡或直接换卡 | [绿灯与 WiFi](troubleshooting/radxa-boot.md) |
+| 单个舵机不动作，或不知道 ID 怎么分配 | 先只接一个舵机，确认调试板、供电、线序和 ID 表 | [舵机设置](build/servo-hd1910.md) |
+| 3D 件装不进飞特舵机 | 检查是否为飞特版、避让孔和散热孔 | [3D 与装配](build/assembly-and-wiring.md) |
+| 疑惑 HAT 是否需要刷固件 | HAT 没有独立 MCU 固件，先查电源、40 Pin 和总线 | [HAT](build/hat-board.md) |
 | 多个舵机一起就不稳定 | 按电源、地线、总线负载和线材顺序排查 | [丢帧排查](troubleshooting/frame-drop.md) |
 | IMU 数值跳或不认方向 | 先确认型号、地址、安装姿态和采样时间 | [IMU 与安装方向](principles/imu-mounting.md) |
 | 想马上开始训练 | 没有整机也可以先准备模型、参数和仿真环境 | [训练路线](build/training.md) |

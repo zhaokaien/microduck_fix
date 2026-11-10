@@ -6,6 +6,7 @@
 
 | 工具 | 用途 | 入口 |
 |---|---|---|
+| 微雪/飞特舵机调试板 | 提供电池电源、舵机总线接口和电脑 USB/串口连接 | 本项目实际使用微雪调试板，具体型号待补 |
 | 飞特网页舵机控制器 | 扫描 ID、改 ID、简单测试 | [打开](https://juxi-technology.github.io/FT-ServoController-web/) |
 | fanhao 网页舵机工具 | 3D 姿态、ID 与标定辅助 | [GitHub](https://github.com/fanhao375/microduck-replica/tree/master/tools/servo-web) |
 | kissqy 机器人中控 | 连接整机、查看姿态、标定与操作 | [项目](https://github.com/kissqy/Microduck-kissqy) |
